@@ -30,7 +30,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Being very new to ios App dev, figuring out the options mentioned in tutorials and implementing the same were quite tricky.
 
 ## License
 
