@@ -16,6 +16,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //Retrive information to load into application
+        let time_1 = UserDefaults.standard.object(forKey: "last_run") as? Date
+        let bill = UserDefaults.standard.string(forKey: "bill_amount")
+        let elapsed = Date().timeIntervalSince(time_1!)
+        let minutes = Int(elapsed/60.0)
+        //print(time_1)
+        
+        //Enter bill amount and calculate tip if the app was closed 10 minutes ago
+        if minutes < 10 && bill != nil{
+            //print("get's called")
+            ViewController.bill_amount = bill!
+        }
+        else{
+            //print("App started")
+            ViewController.bill_amount = ""
+        }
         return true
     }
 
@@ -35,10 +52,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        UserDefaults.standard.set(ViewController.bill_amount,forKey: "bill_amount")
+        UserDefaults.standard.set(Date(),forKey: "last_run")
+        UserDefaults.standard.synchronize()
+        //print(Date())
     }
 
 

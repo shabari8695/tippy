@@ -14,10 +14,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var billField: UITextField!
     @IBOutlet weak var tipControl: UISegmentedControl!
+    static var bill_amount = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        billField.text = ViewController.bill_amount
         billField.becomeFirstResponder()
+        if billField.text != ""{
+            self.calculateAmounts()
+        }
     }
     
     @IBAction func tapFunction(_ sender: Any) {
@@ -32,6 +37,12 @@ class ViewController: UIViewController {
         
         tipLabel.text = String(format: "$%0.2f",tip)
         totalLabel.text = String(format: "$%0.2f",total)
+        if bill == 0.0{
+            ViewController.bill_amount = ""
+        }
+        else{
+            ViewController.bill_amount = String(bill)
+        }
     }
     
     @IBAction func editChange(_ sender: Any) {
@@ -41,5 +52,6 @@ class ViewController: UIViewController {
     @IBAction func tipChange(_ sender: Any) {
         self.calculateAmounts()
     }
+
 }
 
